@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <script type="text/javascript">
+      var ws = null;
+
+      function setupWebsockets(ws) {
+      if ("Websocket" in window) {
+      ws = new Websocket("ws://localhost:1701");
+      ws.onopen = function() {
+        // Web Socket is connected, send data using send()
+        ws.send("Message to send");
+      };
+
+      ws.onmessage = function (evt) {
+        var received_msg = evt.data;
+        console.log("> " + evt.data);
+      };
+
+      ws.onclose = function() {
+        console.log("Dropped");
+      };
+}
+else {
+console.log("boo");
+}
+}
+function WebSocketTest(ws)
+{
+  if ("WebSocket" in window)
+  {
+     // Let us open a web socket
+     var ws = new WebSocket("ws://localhost:1701");
+     ws.onopen = function() {
+      console.log("Connection Established");
+     };
+     ws.onmessage = function (evt)
+     {
+        var received_msg = evt.data;
+      console.log(received_msg);
+     };
+     ws.onclose = function()
+     {
+        // websocket is closed.
+        alert("Connection is closed...");
+     };
+  }
+  else
+  {
+     // The browser doesn't support WebSocket
+     alert("WebSocket NOT supported by your Browser!");
+  }
+      return ws;
+}
+//setupWebsockets()
+ws = WebSocketTest(ws)
+    </script>
+  </head>
+  <body></body>
+</html>
